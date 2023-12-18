@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ru</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="mouth">O</p>
+    <p id="text"></p>
+
+    <script>
+      var script = "eee eee im sorry EWW you perv haha i like that you arent afraid of them, even when they’re all gross and cold. nobody ever lets me put my cold feet on them without recoiling. you always pull me closer and share your warmth. you are on feet warming duty bro. update ur linkedin. this is ur brand new job. its not just my cold feet. i feel like you’ve taken everything i didnt love about myself into your warmth these past few years. everything disgusting and everything rotten, every part of myself that rolls around in my own invented filth. you let me sleep next to you unshowered, you’ve eaten my pussy in a portapotty. there was that time i cried myself to sleep and got snot and makeup everywhere, i remember you telling me i was serving lana del rey ultraviolence c*nt. i mean how can this phenomenon even be described, its like you are blinded by our context, our nuance, our love, our history, our hot girl persona, our dykeness, our synchronicities, our differences, our freak vibes, our hardships, our everything. My snot is not cute.";
+      var wordsToCheck = {
+        "sorry": 5000,
+        "haha": 5000,
+        "warmth.": 7000,
+        "c*nt": 13000,
+        "job": 4500,
+        "cute": 500000
+      };
+      var words = script.split(/\s+/);
+      var synth = window.speechSynthesis;
+      var currentWordIndex = 0;
+      var paused = false;
+      var speechTimeout;
+
+      function speak(text) {
+        clearTimeout(speechTimeout);
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.onend = function () {
+          clearTimeout(speechTimeout);
+          if (!paused && currentWordIndex < words.length) {
+            animateText(); // Move to the next set of words after speaking
+          }
+        };
+        synth.speak(utterance);
+
+        // Timeout to move on if speech does not start
+        speechTimeout = setTimeout(() => {
+          if (!paused && currentWordIndex < words.length) {
+            animateText(); // Move to the next set of words
+          }
+        }, 1500); // Adjust timeout as needed
+      }
+
+      function animateMouth(timestamp) {
+        if (!paused) {
+          if (timestamp % 800 < 400) {
+            document.getElementById("mouth").innerHTML = "O";
+          } else {
+            document.getElementById("mouth").innerHTML = "--";
+          }
+        } else {
+          document.getElementById("mouth").innerHTML = "--";
+        }
+      }
+
+      function animateText() {
+        if (currentWordIndex < words.length) {
+          var currentWords = words
+            .slice(currentWordIndex, currentWordIndex + 4)
+            .join(" ");
+          document.getElementById("text").innerText = currentWords;
+
+          // Check for pause words and their durations
+          var pauseDuration = 0;
+          Object.keys(wordsToCheck).forEach((word) => {
+            if (currentWords.includes(word)) {
+              pauseDuration = Math.max(pauseDuration, wordsToCheck[word]);
+            }
+          });
+
+          if (pauseDuration > 0) {
+            paused = true;
+            speak(currentWords);
+            setTimeout(() => {
+              paused = false;
+              if (currentWordIndex < words.length) {
+                animateText();
+              }
+            }, pauseDuration);
+          } else {
+            speak(currentWords);
+          }
+
+          currentWordIndex += 4;
+        } else {
+          console.log("End of script");
+          clearTimeout(speechTimeout);
+        }
+      }
+
+      function startAnimation() {
+        function step(timestamp) {
+          animateMouth(timestamp);
+          window.requestAnimationFrame(step);
+        }
+
+        window.requestAnimationFrame(step);
+        animateText(); // Start the text animation
+      }
+
+      startAnimation();
+    </script>
+  </body>
+</html>
