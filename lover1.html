@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
-    <title>Ru</title>
+    <title>Ashe/Ru</title>
     <style>
       body {
         display: flex;
@@ -20,14 +21,16 @@
     <p id="text"></p>
 
     <script>
-      var script = "eee eee im sorry EWW you perv haha i like that you arent afraid of them, even when they’re all gross and cold. nobody ever lets me put my cold feet on them without recoiling. you always pull me closer and share your warmth. you are on feet warming duty bro. update ur linkedin. this is ur brand new job. its not just my cold feet. i feel like you’ve taken everything i didnt love about myself into your warmth these past few years. everything disgusting and everything rotten, every part of myself that rolls around in my own invented filth. you let me sleep next to you unshowered, you’ve eaten my pussy in a portapotty. there was that time i cried myself to sleep and got snot and makeup everywhere, i remember you telling me i was serving lana del rey ultraviolence c*nt. i mean how can this phenomenon even be described, its like you are blinded by our context, our nuance, our love, our history, our hot girl persona, our dykeness, our synchronicities, our differences, our freak vibes, our hardships, our everything. My snot is not cute.";
+      var script =
+        "babe omg ur feet are soo so cold, give em to me, i’ll warm you up! ya im a perv, a perv for your little bitty cold feets dude i would literally warm them up with my own breath idc ITS NOT A JOB ITS A SUPER POWER lana del rey ultraviolence c*nt yes omg. you really were, i mean don’t think you were COVERED in snot it was more like little glistenings on your nose and lip which was honestly kinda chic. dude, i would not call it a mere phenomenon, love isn’t a phenomenon, love isn’t a phenomenon love isn’t a phenomenon love isn’t a phenomenon love isn’t a phenomenon love isn’t a phenomenon i dont love you for the mystery of what’s behind your big eyes i love you for what i know. i dont love u for the history we share, if i met you today i would love you just as much as i do now. I could never love the potential of you in my life, i dont have time to distance myself from the NOW with you, you are all encompassing. the identity in your heart is the sole proof of my existence. "; // (Truncated for brevity)
       var wordsToCheck = {
-        "sorry": 5000,
-        "haha": 5000,
-        "warmth.": 7000,
-        "c*nt": 13000,
-        "job": 4500,
-        "cute": 500000
+        "cold,": 4000,
+        "up!": 3000,
+        feets: 14500,
+        idc: 8000,
+        POWER: 32000,
+        "chic.": 6000,
+        existence: 5000000,
       };
       var words = script.split(/\s+/);
       var synth = window.speechSynthesis;
@@ -38,6 +41,7 @@
       function speak(text) {
         clearTimeout(speechTimeout);
         var utterance = new SpeechSynthesisUtterance(text);
+        utterance.volume = parseFloat(0); // Convert string to float
         utterance.onend = function () {
           clearTimeout(speechTimeout);
           if (!paused && currentWordIndex < words.length) {
@@ -51,7 +55,7 @@
           if (!paused && currentWordIndex < words.length) {
             animateText(); // Move to the next set of words
           }
-        }, 1500); // Adjust timeout as needed
+        }, 4000); // Adjust timeout as needed
       }
 
       function animateMouth(timestamp) {
