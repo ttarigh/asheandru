@@ -41,7 +41,6 @@
       function speak(text) {
         clearTimeout(speechTimeout);
         var utterance = new SpeechSynthesisUtterance(text);
-        utterance.volume = parseFloat(0); // Convert string to float
         utterance.onend = function () {
           clearTimeout(speechTimeout);
           if (!paused && currentWordIndex < words.length) {
